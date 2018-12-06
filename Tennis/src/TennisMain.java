@@ -15,12 +15,13 @@ public class TennisMain
 	private CourtType courtType;
 	
 	
-	public Player getPlayer() 
+	public Player getPlayer1() 
 	{
 		return player;
+		
 	}
 
-	public void setPlayer(Player player) 
+	public void setPlayer1(Player player) 
 	{
 		this.player = player;
 	}
@@ -69,39 +70,9 @@ public class TennisMain
 	{
 		Scanner kbd = new Scanner(System.in);
 		System.out.println("Enter Preliminary info:");
-		PreliminaryInfo preInfo = new PreliminaryInfo() 
-		{
-			
-			@Override
-			public Stadium createStadium()
-			{
-				System.out.println("Stadium Name: ");
-				System.out.println(kbd.nextLine());
-				return null;
-			}
-			
-			@Override
-			public Player createPlayer()
-			{
-				createPlayer().toString();
-				return null;
-			}
-			
-			@Override
-			public Location createLocation()
-			{
-				createLocation().toString();
-				return null;
-			}
-			
-			@Override
-			public CourtType createCourtType() 
-			{
-				createCourtType().toString();
-				return null;
-			}
-		};
+		TennisMain tennis = new TennisMain();
 		
+		tennis.gatherPrelim(null);
 		
 	}
 
