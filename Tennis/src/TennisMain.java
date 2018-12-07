@@ -1,7 +1,7 @@
-import java.util.Scanner;
 
-import tennisProgram.CourtType;
-import tennisProgram.Location;
+
+import tennisProgram.GatherPrelim;
+import tennisProgram.NewPlayers;
 import tennisProgram.Player;
 import tennisProgram.PreliminaryInfo;
 import tennisProgram.Stadium;
@@ -11,17 +11,15 @@ public class TennisMain
 	
 	private Player player;
 	private Stadium stadium;
-	private Location location;
-	private CourtType courtType;
+
 	
-	
-	public Player getPlayer1() 
+	public Player getPlayer() 
 	{
 		return player;
 		
 	}
 
-	public void setPlayer1(Player player) 
+	public void setPlayer(Player player) 
 	{
 		this.player = player;
 	}
@@ -36,43 +34,32 @@ public class TennisMain
 		this.stadium = stadium;
 	}
 
-	public Location getLocation() 
-	{
-		return location;
-	}
-
-	public void setLocation(Location location) 
-	{
-		this.location = location;
-	}
-
-	public CourtType getCourtType() 
-	{
-		return courtType;
-	}
-
-	public void setCourtType(CourtType courtType)
-	{
-		this.courtType = courtType;
-	}
-	
-	public void gatherPrelim(PreliminaryInfo info) 
+	public void gabe(PreliminaryInfo info) 
 	{
 		player = info.createPlayer();
 		stadium = info.createStadium();
-		location = info.createLocation();
-		courtType = info.createCourtType();
-		
 	}
 
 
 	public static void main(String[] args) 
 	{
-		Scanner kbd = new Scanner(System.in);
 		System.out.println("Enter Preliminary info:");
 		TennisMain tennis = new TennisMain();
+		tennis.gabe(new GatherPrelim());
+		for (int i = 0; i < 2; i++) {
+		System.out.println(tennis.getPlayer() + " " + (i + 1) + ":");
+		System.out.println("Name: " + tennis.getPlayer().getName());
+		System.out.println("Gender: " + tennis.getPlayer().getGender());
+		System.out.println("Country: " + tennis.getPlayer().getCountry()+ "\n");
 		
-		tennis.gatherPrelim(null);
+		
+		}
+		
+		System.out.println(tennis.getStadium() + " :");
+		System.out.println("Stadium Name: " + tennis.getStadium().getStadName());
+		System.out.println("Location: " + tennis.getStadium().getStadLocation());
+		System.out.println("Court Type: " + tennis.getStadium().getStadCourtType());
+		
 		
 	}
 
