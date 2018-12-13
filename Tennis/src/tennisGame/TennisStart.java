@@ -162,7 +162,7 @@ public class TennisStart extends JFrame implements ActionListener {
         JButton viewLog = new JButton("View game log");
         JButton startNewGame = new JButton("Start a new game");
         JButton exit = new JButton("Exit program");
-        
+        JButton enter = new JButton("Button");
         viewLog.addActionListener(this);
         startNewGame.addActionListener(this);
         exit.addActionListener(new TheEndListener());
@@ -205,6 +205,8 @@ public class TennisStart extends JFrame implements ActionListener {
         playerTwoCountry = new JTextField(NUMBER_OF_CHARS);
         gender = new JTextField(GENDER);
         
+       
+        
         prelimInfoScreen.add(stadiumNameLabel);
         prelimInfoScreen.add(stadiumName);
         prelimInfoScreen.add(locationLabel);
@@ -224,13 +226,13 @@ public class TennisStart extends JFrame implements ActionListener {
         
         prelimInfoScreen.add(genderLabel);
         prelimInfoScreen.add(gender);
-        
-        
-        
+                
         prelimInfoScreen.pack();
         prelimInfoScreen.setSize(800, 600);
         prelimInfoScreen.setVisible(true);
+        
 	}
+	
 	
 	public void startGameWindow() {
 		//Use flow layout manager for now
@@ -282,6 +284,7 @@ public class TennisStart extends JFrame implements ActionListener {
 			splashScreen.dispose();
 			prelimInfoScreen();
 		case "View Log":
+			
 			
 		}
 		
