@@ -22,6 +22,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+import javax.swing.JTextField;
 
 // TennisStart builds a basic window using javax.swing. 
 // The window includes buttons that implement an action 
@@ -36,6 +37,25 @@ public class TennisStart extends JFrame implements ActionListener {
 	
 	private boolean startGame = true;
 	private boolean exitGame = true;
+	
+	private static final int NUMBER_OF_CHARS = 40;
+	private static final int GENDER = 1;
+	private JTextField playerOneName;
+	private JTextField playerTwoName;
+	private JTextField gender;
+	private JTextField playerOneCountry;
+	private JTextField playerTwoCountry;
+	private JTextField stadiumName;
+	private JTextField location;
+	private JTextField fieldType;
+
+
+	
+	
+	//Create the frame layer publicly
+	public JFrame splashScreen = new JFrame("Welcome");
+	public JFrame prelimInfoScreen = new JFrame("Welcome");
+	public JFrame gameScreen = new JFrame("Tennis Game Score Controller");
 
 		//OLD CODE
 	/**
@@ -132,14 +152,12 @@ public class TennisStart extends JFrame implements ActionListener {
 	 */
 
 	public void startSplashScreen() {
-		//Create the frame layer.
-		JFrame window = new JFrame("Welcome");
 		//Use flow layout manager for now
         FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 25, 25);
         //Set the layout manager.
-        window.setLayout(layout);
+        splashScreen.setLayout(layout);
         //Set the background color
-        window.getContentPane().setBackground(Color.GREEN.darker());
+        splashScreen.getContentPane().setBackground(Color.GREEN.darker());
         
         JButton viewLog = new JButton("View game log");
         JButton startNewGame = new JButton("Start a new game");
@@ -149,24 +167,78 @@ public class TennisStart extends JFrame implements ActionListener {
         startNewGame.addActionListener(this);
         exit.addActionListener(new TheEndListener());
         
-        window.add(viewLog);
-        window.add(startNewGame);
-        window.add(exit);
+        splashScreen.add(viewLog);
+        splashScreen.add(startNewGame);
+        splashScreen.add(exit);
         
-        window.pack();
-        window.setSize(800, 600);
-        window.setVisible(true);
+        splashScreen.pack();
+        splashScreen.setSize(800, 600);
+        splashScreen.setVisible(true);
 	}
 	
-	public void startGameWindow() {
-		//Create the frame layer.
-		JFrame window = new JFrame("Tennis Game Score Controller");
+	public void prelimInfoScreen() {
 		//Use flow layout manager for now
         FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 25, 25);
         //Set the layout manager.
-        window.setLayout(layout);
+        prelimInfoScreen.setLayout(layout);
         //Set the background color
-        window.getContentPane().setBackground(Color.GREEN.darker());
+        prelimInfoScreen.getContentPane().setBackground(Color.GREEN.darker());
+        //New Labels for the fields
+        JLabel stadiumNameLabel = new JLabel("Enter the stadium name");
+        JLabel locationLabel = new JLabel("Enter the stadium location");
+        JLabel fieldTypeLabel = new JLabel("Enter the field type");
+        
+        JLabel playerOneNameLabel = new JLabel("Enter player one's name");
+        JLabel playerTwoNameLabel = new JLabel("Enter player two's name");
+        JLabel playerOneCountryLabel = new JLabel("Enter player one's country");
+        JLabel playerTwoCountryLabel = new JLabel("Enter player two's country");
+        JLabel genderLabel = new JLabel("Enter the players gender");
+        
+        
+        
+        stadiumName = new JTextField(NUMBER_OF_CHARS);
+        location = new JTextField(NUMBER_OF_CHARS);
+        fieldType = new JTextField(NUMBER_OF_CHARS);
+        playerOneName = new JTextField(NUMBER_OF_CHARS);
+        playerTwoName = new JTextField(NUMBER_OF_CHARS);
+        playerOneCountry = new JTextField(NUMBER_OF_CHARS);
+        playerTwoCountry = new JTextField(NUMBER_OF_CHARS);
+        gender = new JTextField(GENDER);
+        
+        prelimInfoScreen.add(stadiumNameLabel);
+        prelimInfoScreen.add(stadiumName);
+        prelimInfoScreen.add(locationLabel);
+        prelimInfoScreen.add(location);
+        prelimInfoScreen.add(fieldTypeLabel);
+        prelimInfoScreen.add(fieldType);
+        
+        prelimInfoScreen.add(playerOneNameLabel);
+        prelimInfoScreen.add(playerOneName);
+        prelimInfoScreen.add(playerOneCountryLabel);
+        prelimInfoScreen.add(playerOneCountry);
+        
+        prelimInfoScreen.add(playerTwoNameLabel);
+        prelimInfoScreen.add(playerTwoName);
+        prelimInfoScreen.add(playerTwoCountryLabel);
+        prelimInfoScreen.add(playerTwoCountry);
+        
+        prelimInfoScreen.add(genderLabel);
+        prelimInfoScreen.add(gender);
+        
+        
+        
+        prelimInfoScreen.pack();
+        prelimInfoScreen.setSize(800, 600);
+        prelimInfoScreen.setVisible(true);
+	}
+	
+	public void startGameWindow() {
+		//Use flow layout manager for now
+        FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 25, 25);
+        //Set the layout manager.
+        gameScreen.setLayout(layout);
+        //Set the background color
+        gameScreen.getContentPane().setBackground(Color.GREEN.darker());
         
         //Create the menu bar.
         JMenuBar menuBar = new JMenuBar();
@@ -181,24 +253,16 @@ public class TennisStart extends JFrame implements ActionListener {
         penaltyMenu.add(penaltyItem2);
         penaltyMenu.add(penaltyItem3);
         penaltyMenu.addSeparator();
-        //Create another menu
-        JMenu infoMenu = new JMenu("Preliminary Information");
-        //Group of JMenuItems
-        JMenuItem player1 = new JMenuItem("Enter player 1", KeyEvent.VK_T);
-        JMenuItem player2 = new JMenuItem("Enter player 2", KeyEvent.VK_T);
-        
-        infoMenu.add(player1);
-        infoMenu.add(player2);
         
         menuBar.add(penaltyMenu);
-        menuBar.add(infoMenu);
+        
         //Propagate window objects
-        window.add(menuBar);
+        gameScreen.add(menuBar);
         
-        window.pack();
-        window.setSize(800, 600);
+        gameScreen.pack();
+        gameScreen.setSize(800, 600);
         
-        window.setVisible(true);
+        gameScreen.setVisible(true);
         
         System.out.println("Done!");
 	}
@@ -215,8 +279,8 @@ public class TennisStart extends JFrame implements ActionListener {
 		switch(actionCommand) 
 		{
 		case "Start a new game":
-			dispose();
-			startGameWindow();
+			splashScreen.dispose();
+			prelimInfoScreen();
 		case "View Log":
 			
 		}
