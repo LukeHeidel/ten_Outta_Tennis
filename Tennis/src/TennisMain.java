@@ -35,7 +35,7 @@ public class TennisMain
 		this.stadium = stadium;
 	}
 
-	public void gabe(PreliminaryInfo info) 
+	public void prelim(PreliminaryInfo info) 
 	{
 		player = info.createPlayer();
 		stadium = info.createStadium();
@@ -48,9 +48,9 @@ public class TennisMain
 		TennisMain tennis = new TennisMain();
 		TennisStart start = new TennisStart();
 		
-		start.startGameWindow();
-		/*
-		tennis.gabe(new GatherPrelim());
+		//start.startGameWindow();
+		
+		tennis.prelim(new GatherPrelim());
 		for (int i = 0; i < 2; i++) 
 		{
 		System.out.println(tennis.getPlayer() + " " + (i + 1) + ":");
@@ -63,8 +63,10 @@ public class TennisMain
 		System.out.println("Stadium Name: " + tennis.getStadium().getStadName());
 		System.out.println("Location: " + tennis.getStadium().getStadLocation());
 		System.out.println("Court Type: " + tennis.getStadium().getStadCourtType());
-		*/
 		
+		
+		
+		start.startGameWindow();
 	}
 
 }
