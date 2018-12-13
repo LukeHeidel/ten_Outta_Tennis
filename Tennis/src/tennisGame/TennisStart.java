@@ -3,12 +3,15 @@ package tennisGame;
 import tennisGame.TennisScoring;
 import tennisGame.TennisPenalties;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.JTextField;
 
@@ -153,7 +157,7 @@ public class TennisStart extends JFrame implements ActionListener {
 
 	public void startSplashScreen() {
 		//Use flow layout manager for now
-        FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 25, 25);
+        FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 5, 25);
         //Set the layout manager.
         splashScreen.setLayout(layout);
         //Set the background color
@@ -162,7 +166,7 @@ public class TennisStart extends JFrame implements ActionListener {
         JButton viewLog = new JButton("View game log");
         JButton startNewGame = new JButton("Start a new game");
         JButton exit = new JButton("Exit program");
-        JButton enter = new JButton("Button");
+        
         viewLog.addActionListener(this);
         startNewGame.addActionListener(this);
         exit.addActionListener(new TheEndListener());
@@ -178,21 +182,27 @@ public class TennisStart extends JFrame implements ActionListener {
 	
 	public void prelimInfoScreen() {
 		//Use flow layout manager for now
-        FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 25, 25);
+        GridLayout layout = new GridLayout(15, 2, 25, 25);
         //Set the layout manager.
         prelimInfoScreen.setLayout(layout);
         //Set the background color
         prelimInfoScreen.getContentPane().setBackground(Color.GREEN.darker());
+        //JButton to commit preliminary fields
+        JButton commit = new JButton("Commit information");
+        commit.addActionListener(this);
         //New Labels for the fields
-        JLabel stadiumNameLabel = new JLabel("Enter the stadium name");
-        JLabel locationLabel = new JLabel("Enter the stadium location");
-        JLabel fieldTypeLabel = new JLabel("Enter the field type");
+        JLabel welcomeLabel = new JLabel("Please enter the preliminary match information before continuing...");
+        JLabel empty1 = new JLabel("");
+        JLabel empty2 = new JLabel("");
+        JLabel stadiumNameLabel = new JLabel("Stadium, Arena, or Court name: ");
+        JLabel locationLabel = new JLabel("Stadium, Arena, or Court location: ");
+        JLabel fieldTypeLabel = new JLabel("Stadium, Arena, or Court surface type: ");
         
-        JLabel playerOneNameLabel = new JLabel("Enter player one's name");
-        JLabel playerTwoNameLabel = new JLabel("Enter player two's name");
-        JLabel playerOneCountryLabel = new JLabel("Enter player one's country");
-        JLabel playerTwoCountryLabel = new JLabel("Enter player two's country");
-        JLabel genderLabel = new JLabel("Enter the players gender");
+        JLabel playerOneNameLabel = new JLabel("Enter player one's name: ");
+        JLabel playerTwoNameLabel = new JLabel("Enter player two's name: ");
+        JLabel playerOneCountryLabel = new JLabel("Enter player one's country: ");
+        JLabel playerTwoCountryLabel = new JLabel("Enter player two's country: ");
+        JLabel genderLabel = new JLabel("Male or Female Match: (M or F)");
         
         
         
@@ -205,35 +215,38 @@ public class TennisStart extends JFrame implements ActionListener {
         playerTwoCountry = new JTextField(NUMBER_OF_CHARS);
         gender = new JTextField(GENDER);
         
-       
+        prelimInfoScreen.add(welcomeLabel,BorderLayout.NORTH);
+        prelimInfoScreen.add(empty1,BorderLayout.NORTH);
         
-        prelimInfoScreen.add(stadiumNameLabel);
-        prelimInfoScreen.add(stadiumName);
-        prelimInfoScreen.add(locationLabel);
-        prelimInfoScreen.add(location);
-        prelimInfoScreen.add(fieldTypeLabel);
-        prelimInfoScreen.add(fieldType);
+        prelimInfoScreen.add(stadiumNameLabel, BorderLayout.CENTER);
+        prelimInfoScreen.add(stadiumName, BorderLayout.WEST);
+        prelimInfoScreen.add(locationLabel,BorderLayout.CENTER);
+        prelimInfoScreen.add(location, BorderLayout.WEST);
+        prelimInfoScreen.add(fieldTypeLabel,BorderLayout.CENTER);
+        prelimInfoScreen.add(fieldType, BorderLayout.WEST);
         
-        prelimInfoScreen.add(playerOneNameLabel);
-        prelimInfoScreen.add(playerOneName);
-        prelimInfoScreen.add(playerOneCountryLabel);
-        prelimInfoScreen.add(playerOneCountry);
+        prelimInfoScreen.add(playerOneNameLabel,BorderLayout.CENTER);
+        prelimInfoScreen.add(playerOneName, BorderLayout.WEST);
+        prelimInfoScreen.add(playerOneCountryLabel,BorderLayout.CENTER);
+        prelimInfoScreen.add(playerOneCountry, BorderLayout.WEST);
         
-        prelimInfoScreen.add(playerTwoNameLabel);
-        prelimInfoScreen.add(playerTwoName);
-        prelimInfoScreen.add(playerTwoCountryLabel);
-        prelimInfoScreen.add(playerTwoCountry);
+        prelimInfoScreen.add(playerTwoNameLabel,BorderLayout.CENTER);
+        prelimInfoScreen.add(playerTwoName, BorderLayout.WEST);
+        prelimInfoScreen.add(playerTwoCountryLabel,BorderLayout.CENTER);
+        prelimInfoScreen.add(playerTwoCountry, BorderLayout.WEST);
         
-        prelimInfoScreen.add(genderLabel);
-        prelimInfoScreen.add(gender);
+        prelimInfoScreen.add(genderLabel,BorderLayout.EAST);
+        prelimInfoScreen.add(gender, BorderLayout.WEST);
+        
+        prelimInfoScreen.add(empty2,BorderLayout.NORTH);
+        prelimInfoScreen.add(commit,BorderLayout.WEST);
                 
         prelimInfoScreen.pack();
-        prelimInfoScreen.setSize(800, 600);
+        prelimInfoScreen.setSize(1280, 720);
         prelimInfoScreen.setVisible(true);
         
 	}
-	
-	
+
 	public void startGameWindow() {
 		//Use flow layout manager for now
         FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 25, 25);
@@ -283,9 +296,38 @@ public class TennisStart extends JFrame implements ActionListener {
 		case "Start a new game":
 			splashScreen.dispose();
 			prelimInfoScreen();
-		case "View Log":
-			
-			
+			break;
+		case "Commit information":
+			if((stadiumName.getText().equals("")) || (location.getText().equals("")) || (fieldType.getText().equals("")) || (playerOneName.getText().equals(""))
+					|| (playerTwoName.getText().equals("")) || (playerOneCountry.getText().equals("")) || (playerTwoCountry.getText().equals("")) || (gender.getText().equals("")))
+			{
+				JOptionPane.showMessageDialog(prelimInfoScreen,
+					    "Empty fields exist, please enter the all the preliminary match information before continuing...");
+				System.out.println("Empty fields exist");	
+			}
+			else if (gender.getText().equals("Gamer")) 
+			{
+				JOptionPane.showMessageDialog(prelimInfoScreen,
+					    "This says a lot about our society...");
+			}
+			else if(!(gender.getText().equals("M")) && (!(gender.getText().equals("F"))))
+			{
+				System.out.println(gender.getText());
+				System.out.println("Invalid gender");
+				JOptionPane.showMessageDialog(prelimInfoScreen,
+					    "Please enter valid character, 'M' or 'F'.");
+			}
+			else if ((gender.getText().equals("M") ||(gender.getText().equals("F"))))
+			{
+				System.out.println("Triggered valid sequence");
+				if(gender.getText().equals("M"))
+					System.out.println("Male match");
+				else if(gender.getText().equals("F"))
+					System.out.println("Female match");
+				prelimInfoScreen.dispose();
+				startGameWindow();
+			}
+			break;
 		}
 		
 	}
