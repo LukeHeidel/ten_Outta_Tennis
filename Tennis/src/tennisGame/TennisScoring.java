@@ -1,17 +1,31 @@
 package tennisGame;
 
-public class TennisScoring {
+public class TennisScoring 
+{
 	
-	protected int PlayerOneGameScore;
-	protected int PlayerTwoGameScore;
+	protected int playerOneGameScore;
+	protected int playerTwoGameScore;
 	
-	protected int PlayerOneSetScore;
-	protected int PlayerTwoSetScore;
+	protected int playerOneSetScore;
+	protected int playerTwoSetScore;
 	
-	protected int PlayerOneSetWins;
-	protected int PlayerTwoSetWins;
+	protected int playerOneSetWins;
+	protected int playerTwoSetWins;
+	
+	protected int setOneBreakerScore;
+	protected int setTwoBreakerScore;
 	
 	protected int requiredSets;
+	
+	private boolean playerOneServe = true;
+	private boolean playerTwoServe = false;
+	
+	private boolean tie = false;
+	private boolean playerOneAdvantage;
+	private boolean playerTwoAdvantage;
+	
+	
+	
 	
 	//This class includes the games scoring logic, as well as the penalty logic.
 	//These methods 
@@ -19,78 +33,114 @@ public class TennisScoring {
 	//TODO: Build and implement penalty logic.
 	
 	
-	public int PlayerOneScoring() 
+	public void PlayerOneScoring() 
 	{
 		
-		if (PlayerOneGameScore == 0) 
+		if (playerOneGameScore == 0) 
 		{
-			PlayerOneGameScore = PlayerOneGameScore + 15;
-			return PlayerOneGameScore;
+			playerOneGameScore = playerOneGameScore + 15;
 		}
-		if (PlayerOneGameScore == 15) {
-			PlayerOneGameScore = PlayerOneGameScore + 15;
-			return PlayerOneGameScore;
-		}
-		if(PlayerOneGameScore == 30) 
+		if (playerOneGameScore == 15) 
 		{
-			PlayerOneGameScore = PlayerOneGameScore + 10;
-			return PlayerOneGameScore;
+			playerOneGameScore = playerOneGameScore + 15;
 		}
-		if (PlayerOneGameScore == 40 && PlayerTwoGameScore < 40)
+		if(playerOneGameScore == 30) 
 		{
-			PlayerOneSetScore = PlayerOneSetScore + 1;
-			PlayerOneGameScore = 0;
-			PlayerTwoGameScore = 0;
-			return PlayerOneSetScore;
+			playerOneGameScore = playerOneGameScore + 10;
 		}
-		if (PlayerOneSetScore == 6 && PlayerOneSetScore - 2 >= PlayerTwoSetScore)
+		if (playerOneGameScore == 40 && playerTwoGameScore < 40)
 		{
-			PlayerOneSetWins = PlayerOneSetWins + 1;
+			playerOneSetScore = playerOneSetScore + 1;
+			playerOneGameScore = 0;
+			playerTwoGameScore = 0;
+			playerOneServe = !playerOneServe;
+			playerTwoServe = !playerTwoServe;
+		}
+		if (playerOneSetScore == 6 && playerOneSetScore - 2 >= playerTwoSetScore)
+		{
+			playerOneSetWins = playerOneSetWins + 1;
 		} 
-		if (PlayerOneSetWins == requiredSets)
+		if (playerOneSetWins == requiredSets)
 		{
 			//TODO have Player one win
 		}	
-		
-		return 1;	
+	
 	}
 	
-	public int PlayerTwoScoring() 
+	public void PlayerTwoScoring() 
 	{
 		
-		if (PlayerTwoGameScore == 0) 
+		if (playerTwoGameScore == 0) 
 		{
-			PlayerTwoGameScore = PlayerTwoGameScore + 15;
-			return PlayerTwoGameScore;
+			playerTwoGameScore = playerTwoGameScore + 15;
 		}
-		if (PlayerTwoGameScore == 15) {
-			PlayerTwoGameScore = PlayerTwoGameScore + 15;
-			return PlayerTwoGameScore;
-		}
-		if(PlayerTwoGameScore == 30) 
+		else if (playerTwoGameScore == 15) 
 		{
-			PlayerTwoGameScore = PlayerTwoGameScore + 10;
-			return PlayerTwoGameScore;
+			playerTwoGameScore = playerTwoGameScore + 15;
 		}
-		if (PlayerTwoGameScore == 40 && PlayerOneGameScore < 40)
+		else if(playerTwoGameScore == 30) 
 		{
-			PlayerTwoSetScore = PlayerTwoSetScore + 1;
-			PlayerOneGameScore = 0;
-			PlayerTwoGameScore = 0;
-			return PlayerTwoSetScore;
+			playerTwoGameScore = playerTwoGameScore + 10;
 		}
-		if (PlayerOneSetScore == 6 && PlayerOneSetScore - 2 >= PlayerTwoSetScore)
+		else if (playerTwoGameScore == 40 && playerOneGameScore < 40)
 		{
-			PlayerOneSetWins = PlayerOneSetWins + 1;
-			return PlayerOneSetWins;
-		} 
-		if (PlayerOneSetWins == requiredSets)
+			playerTwoSetScore = playerTwoSetScore + 1;
+			playerOneGameScore = 0;
+			playerTwoGameScore = 0;
+			playerOneServe = !playerOneServe;
+			playerTwoServe = !playerTwoServe;
+		}
+		else if (playerTwoSetScore == 6 && playerTwoSetScore - 2 >= playerOneSetScore || playerTwoSetScore == 7)
+		{
+			
+		}
+		else if (playerOneSetWins == requiredSets)
 		{
 			//TODO have Player Two win
 		}	
-		
-		return 1;	
+			
 	}
+	
+	public void gameTieBreaker()
+	{
+		tie = true;
+
+		if(playerOneAdvantage == true)
+		{
+			tie = false;
+			playerTwoAdvantage = false;
+		}
+		else if(playerOneAdvantage == true && playerTwoAdvantage == false)
+		{
+			playerOneSetScore = playerOneSetScore + 1;
+		}
+		else if(playerOneAdvantage == true && playerTwoAdvantage == true)
+		{
+			tie = true;
+			playerOneAdvantage = false;
+			playerTwoAdvantage = false;
+		}
+		else if(playerTwoAdvantage == true)
+		{
+			tie = false;
+			playerTwoAdvantage = false;
+		}
+		else if(playerOneAdvantage == true && playerTwoAdvantage == false)
+		{
+			playerTwoSetScore = playerTwoSetScore + 1;
+		}
+
+	}
+	
+	public void setTieBreaker()
+	{
+		if (playerOneSetScore == 6 && playerOneSetScore == 6) 
+		{
+			playerOneServe = !playerOneServe;
+			playerTwoServe = !playerTwoServe;
+		}
+	}
+
 	
 
 

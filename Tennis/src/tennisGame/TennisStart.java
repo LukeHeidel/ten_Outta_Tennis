@@ -68,11 +68,10 @@ public class TennisStart {
       
         JMenu penaltyMenu = new JMenu("Penalty");
         menu.setMnemonic(KeyEvent.VK_A);
-        menu.getAccessibleContext().setAccessibleDescription(
-                "Use this menu to build and run a match");
+
         menuBar2.add(penaltyMenu);
         //Group of JMenuItems
-        JMenuItem penaltyItem1 = new JMenuItem("Minor penalty");
+        JMenuItem penaltyItem1 = new JMenuItem("Minor penalty",KeyEvent.VK_T);
         penaltyMenu.add(penaltyItem1);
         penaltyMenu.addSeparator();
         JMenuItem penaltyItem2 = new JMenuItem("Major penalty");
@@ -127,6 +126,7 @@ public class TennisStart {
 	}
 	
 	public void setGameAction() {
+		
 		
 	}
 }
