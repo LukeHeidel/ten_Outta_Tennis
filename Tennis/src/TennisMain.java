@@ -67,7 +67,8 @@ public class TennisMain
 		
 		
 		
-		start.startGameWindow();
+		//start.startGameWindow();
+		start.startSplashScreen();
 	}
 
 }

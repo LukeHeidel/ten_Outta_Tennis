@@ -10,5 +10,4 @@ public class TheEndListener implements ActionListener {
 		System.out.println("Something Happened!");
 		System.exit(0);
 	}
-
 }
