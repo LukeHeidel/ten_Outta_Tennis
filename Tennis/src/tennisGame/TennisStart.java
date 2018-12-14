@@ -208,18 +208,18 @@ public class TennisStart extends JFrame implements ActionListener {
         JLabel Set5 = new JLabel("Set 5: ");
         JLabel GameSet = new JLabel("GameSet:");
         
-        PlayerOneSet1 = new JLabel(""  + scoring.playerOneSetScore);
-        PlayerOneSet2 = new JLabel("" +  scoring.playerOneSetScore);
-        PlayerOneSet3 = new JLabel("" + scoring.playerOneSetScore);
-        PlayerOneSet4 = new JLabel("" + scoring.playerOneSetScore);
-        PlayerOneSet5 = new JLabel("" + scoring.playerOneSetScore);
+        PlayerOneSet1 = new JLabel("");
+        PlayerOneSet2 = new JLabel("");
+        PlayerOneSet3 = new JLabel("");
+        PlayerOneSet4 = new JLabel("");
+        PlayerOneSet5 = new JLabel("");
         GameSetOne = new JLabel("" + playerOneGameScore);
         
-        PlayerTwoSet1 = new JLabel("" + scoring.playerTwoSetScore);
-        PlayerTwoSet2 = new JLabel("" + scoring.playerTwoSetScore);
-        PlayerTwoSet3 = new JLabel("" + scoring.playerTwoSetScore);
-        PlayerTwoSet4 = new JLabel("" + scoring.playerTwoSetScore);
-        PlayerTwoSet5 = new JLabel("" + scoring.playerTwoSetScore);
+        PlayerTwoSet1 = new JLabel("");
+        PlayerTwoSet2 = new JLabel("");
+        PlayerTwoSet3 = new JLabel("");
+        PlayerTwoSet4 = new JLabel("");
+        PlayerTwoSet5 = new JLabel("");
         GameSetTwo = new JLabel("" + scoring.playerOneGameScore);
         
         penaltyMenu.add(penaltyItem1);
@@ -376,13 +376,19 @@ public class TennisStart extends JFrame implements ActionListener {
 			}
 			break;
 			
-			case "Player One +1":
-				scoring.PlayerOneScoring();
-				playerOneGameScore = scoring.playerOneGameScore;
-				GameSetOne = new JLabel("" + playerOneGameScore);
-				gameScreen.add(GameSetOne);
+		case "Player One +1":
+			scoring.PlayerOneScoring();
+			playerOneGameScore = scoring.playerOneGameScore;
+			GameSetOne = new JLabel("" + playerOneGameScore);
+			gameScreen.add(GameSetOne);
 			break;
-	
+			
+		case "Player Two +1":
+			scoring.PlayerTwoScoring();
+			playerTwoGameScore = scoring.playerTwoGameScore;
+			GameSetTwo = new JLabel("" + playerTwoGameScore);
+			gameScreen.add(GameSetTwo);
+			break;
 			
 		}
 		

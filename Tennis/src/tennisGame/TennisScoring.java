@@ -31,7 +31,15 @@ public class TennisScoring
 	//These methods 
 	//
 	//TODO: Build and implement penalty logic.
+	public int updatePlayerOneSetScore(int score) {
+		return score;
+		
+	}
 	
+	public int updatePlayerTwoSetScore(int score) {
+		return score;
+		
+	}
 	
 	public int PlayerOneScoring() 
 	{
@@ -39,21 +47,37 @@ public class TennisScoring
 		if (playerOneGameScore == 0) 
 		{
 			playerOneGameScore = playerOneGameScore + 15;
-			System.out.println(playerOneGameScore);
-			return playerOneGameScore;	
+			System.out.println("Player one game score: " + playerOneGameScore);
+			System.out.println("Player two game score: " + playerTwoGameScore);
+			updatePlayerOneSetScore(playerOneGameScore);
 		}
 		else if (playerOneGameScore == 15) 
 		{
 			playerOneGameScore = playerOneGameScore + 15;
-			System.out.println(playerOneGameScore);
-			return playerOneGameScore;	
+			System.out.println("Player one game score: " + playerOneGameScore);
+			System.out.println("Player two game score: " + playerTwoGameScore);
+			updatePlayerOneSetScore(playerOneGameScore);
 		}
 		else if(playerOneGameScore == 30) 
 		{
 			playerOneGameScore = playerOneGameScore + 10;
 			System.out.println(playerOneGameScore);
-			return playerOneGameScore;	
+			updatePlayerOneSetScore(playerOneGameScore);
 		}
+		else if ((playerOneGameScore == 40 && playerTwoGameScore < 40) && (playerOneSetScore == 5 && playerOneSetScore - 2 >= playerTwoSetScore))
+		{
+			playerOneSetWins = playerOneSetWins + 1;
+			playerOneGameScore = 0;
+			playerTwoGameScore = 0;
+			playerOneSetScore = 0;
+			playerTwoSetScore = 0;
+			playerOneServe = !playerOneServe;
+			playerTwoServe = !playerTwoServe;
+			System.out.println(playerOneSetScore);
+			System.out.println(playerTwoSetScore);
+			System.out.println(playerOneSetWins);
+			updatePlayerOneSetScore(playerOneGameScore);
+		} 
 		else if (playerOneGameScore == 40 && playerTwoGameScore < 40)
 		{
 			playerOneSetScore = playerOneSetScore + 1;
@@ -61,11 +85,10 @@ public class TennisScoring
 			playerTwoGameScore = 0;
 			playerOneServe = !playerOneServe;
 			playerTwoServe = !playerTwoServe;
+			System.out.println("Player one set score: " + playerOneSetScore);
+			System.out.println("Player two set score: " + playerTwoSetScore);
+			updatePlayerOneSetScore(playerOneGameScore);
 		}
-		else if (playerOneSetScore == 6 && playerOneSetScore - 2 >= playerTwoSetScore)
-		{
-			playerOneSetWins = playerOneSetWins + 1;
-		} 
 		else if (playerOneSetWins == requiredSets)
 		{
 			//TODO have Player one win
@@ -80,20 +103,24 @@ public class TennisScoring
 		if (playerTwoGameScore == 0) 
 		{
 			playerTwoGameScore = playerTwoGameScore + 15;
-			System.out.println(playerTwoGameScore);
-			return(playerTwoGameScore);
+			System.out.println("Player one game score: " + playerOneGameScore);
+			System.out.println("Player two game score: " + playerTwoGameScore);
+			updatePlayerTwoSetScore(playerTwoGameScore);
+			
+			
 		}
 		else if (playerTwoGameScore == 15) 
 		{
 			playerTwoGameScore = playerTwoGameScore + 15;
-			System.out.println(playerTwoGameScore);
-			return(playerTwoGameScore);
+			System.out.println("Player one game score: " + playerOneGameScore);
+			System.out.println("Player two game score: " + playerTwoGameScore);
+			updatePlayerTwoSetScore(playerTwoGameScore);
 		}
 		else if(playerTwoGameScore == 30) 
 		{
 			playerTwoGameScore = playerTwoGameScore + 10;
 			System.out.println(playerTwoGameScore);
-			return(playerTwoGameScore);
+			updatePlayerTwoSetScore(playerTwoGameScore);
 		}
 		else if (playerTwoGameScore == 40 && playerOneGameScore < 40)
 		{
@@ -102,6 +129,9 @@ public class TennisScoring
 			playerTwoGameScore = 0;
 			playerOneServe = !playerOneServe;
 			playerTwoServe = !playerTwoServe;
+			System.out.println("Player one set score: " + playerOneSetScore);
+			System.out.println("Player two set score: " + playerTwoSetScore);
+			updatePlayerTwoSetScore(playerTwoGameScore);
 		}
 		else if (playerTwoSetScore == 6 && playerTwoSetScore - 2 >= playerOneSetScore || playerTwoSetScore == 7)
 		{
