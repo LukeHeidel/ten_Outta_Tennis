@@ -52,7 +52,28 @@ public class TennisStart extends JFrame implements ActionListener {
 	private JTextField stadiumName;
 	private JTextField location;
 	private JTextField fieldType;
-
+	
+    int playerOneGameScore = 0;
+	int playerTwoGameScore = 0; 
+	
+	protected int requiredSets;
+	
+	Canvas canvas = new Canvas();
+	TennisScoring scoring = new TennisScoring();
+	
+	JLabel PlayerOneSet1; 
+    JLabel PlayerOneSet2; 
+    JLabel PlayerOneSet3;
+    JLabel PlayerOneSet4;
+    JLabel PlayerOneSet5;
+    JLabel GameSetOne;
+    
+    JLabel PlayerTwoSet1;
+    JLabel PlayerTwoSet2;
+    JLabel PlayerTwoSet3;
+    JLabel PlayerTwoSet4;
+    JLabel PlayerTwoSet5;
+    JLabel GameSetTwo;
 
 	
 	
@@ -61,99 +82,6 @@ public class TennisStart extends JFrame implements ActionListener {
 	public JFrame prelimInfoScreen = new JFrame("Welcome");
 	public JFrame gameScreen = new JFrame("Tennis Game Score Controller");
 
-		//OLD CODE
-	/**
-	 * 
-        // Create a demo label
-        JLabel label = new JLabel("New Label");
-        //Create the menu bar.
-        JMenuBar menuBar1 = new JMenuBar();
-        JMenuBar menuBar2 = new JMenuBar();
-        //Build the first menu.
-        JMenu menu = new JMenu("Game Setup");
-        menu.setMnemonic(KeyEvent.VK_A);
-        menu.getAccessibleContext().setAccessibleDescription(
-                "Use this menu to build and run a match");
-        menuBar1.add(menu);
-        //Group of JMenuItems
-        JMenuItem menuItem = new JMenuItem("Insert Fields",
-                KeyEvent.VK_T);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-        		KeyEvent.VK_1, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription(
-        		"This doesn't really do anything yet");
-        menu.add(menuItem);
-        //Add a separator.
-        menu.addSeparator();
-
-        //window.setJMenuBar(theJMenuBar);
-     
-        //Build frame buttons.
-        JButton button1 = new JButton("Player 1:"); //Player 1 name
-        JButton button2 = new JButton("Player 2:"); //Player 2 name
-        JButton button3 = new JButton("+1"); //Score for p1
-        JButton button4 = new JButton("+1"); //Score for p2 
-      
-        JMenu penaltyMenu = new JMenu("Penalty");
-        penaltyMenu.setMnemonic(KeyEvent.VK_A);
-        penaltyMenu.getAccessibleContext().setAccessibleDescription(
-                "Use this menu to build and run a match");
-        
-        menuBar1.add(penaltyMenu);
-        //Group of JMenuItems
-        JMenuItem penaltyItem1 = new JMenuItem("Minor penalty",KeyEvent.VK_T);
-        penaltyItem1.setAccelerator(KeyStroke.getKeyStroke(
-        		KeyEvent.VK_1, ActionEvent.ALT_MASK));
-        penaltyItem1.getAccessibleContext().setAccessibleDescription(
-        		"This doesn't really do anything yet");
-        penaltyMenu.add(penaltyItem1);
-        penaltyMenu.addSeparator();
-        JMenuItem penaltyItem2 = new JMenuItem("Major penalty",KeyEvent.VK_T);
-        penaltyMenu.add(penaltyItem2);
-        penaltyMenu.addSeparator();
-        JMenuItem penaltyItem3 = new JMenuItem("Ending penalty",KeyEvent.VK_T);
-        penaltyMenu.add(penaltyItem3);
-        penaltyMenu.addSeparator();
-           
-      
-        button1.setBackground(Color.GREEN.brighter());
-        button1.setForeground(Color.WHITE);
-        //button1.addActionListener(new TheEndListener());
-        button2.setBackground(Color.GREEN.brighter());
-        button2.setForeground(Color.WHITE);
-        
-        button3.setBackground(Color.YELLOW);
-        button3.setForeground(Color.BLACK);
-        
-        button4.setBackground(Color.YELLOW);
-        button4.setForeground(Color.BLACK);
-        
-        penaltyMenu.setBackground(Color.RED);
-        penaltyMenu.setForeground(Color.ORANGE);
-        
-        //window.add(label);
-        
-        //window.add(button1);
-        //window.add(button2);
-        //window.add(button3);
-        //window.add(button4);
-        window.add(penaltyMenu);
-        window.add(menuBar1);
-        //window.add(menuBar2);
-        
-        
-        window.pack();
-        window.setSize(800, 600);
-        window.setLayout(null);
-        window.setVisible(true);
-        
-        menuBar1.setBounds(50, 50, 125, 25);
-        button1.setBounds(50, 150, 100, 25);
-        button2.setBounds(50, 200, 100, 25);
-        button3.setBounds(600, 150, 52, 25);
-        button4.setBounds(600, 200, 52, 25);
-        menuBar2.setBounds(50, 250, 100, 25);
-	 */
 
 	public void startSplashScreen() {
 		//Use flow layout manager for now
@@ -249,20 +177,50 @@ public class TennisStart extends JFrame implements ActionListener {
 
 	public void startGameWindow() {
 		//Use flow layout manager for now
-        FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 25, 25);
         //Set the layout manager.
-        gameScreen.setLayout(layout);
+        
         //Set the background color
         gameScreen.getContentPane().setBackground(Color.GREEN.darker());
         
         //Create the menu bar.
         JMenuBar menuBar = new JMenuBar();
-        //Create some menus
+        //Create some menus.
         JMenu penaltyMenu = new JMenu("Penalty");
-        //Group of JMenuItems
+        //Group of JMenuItems.
         JMenuItem penaltyItem1 = new JMenuItem("Minor penalty",KeyEvent.VK_T);
         JMenuItem penaltyItem2 = new JMenuItem("Major penalty",KeyEvent.VK_T);
         JMenuItem penaltyItem3 = new JMenuItem("Ending penalty",KeyEvent.VK_T);
+        
+        //Group of JButtons.
+        JButton playerOneScoreInc = new JButton("Player One +1");
+        JButton playerTwoScoreInc = new JButton("Player Two +1");
+        //JButton Listeners.
+       
+        
+        //Group of JLables.
+        JLabel playerOneLabel = new JLabel("Player One: " + playerOneName.getText());
+        JLabel playerTwoLabel = new JLabel("Player Two: " + playerTwoName.getText());
+        
+        JLabel Set1 = new JLabel("Set 1: ");
+        JLabel Set2 = new JLabel("Set 2: ");
+        JLabel Set3 = new JLabel("Set 3: ");
+        JLabel Set4 = new JLabel("Set 4: ");
+        JLabel Set5 = new JLabel("Set 5: ");
+        JLabel GameSet = new JLabel("GameSet:");
+        
+        PlayerOneSet1 = new JLabel(""  + scoring.playerOneSetScore);
+        PlayerOneSet2 = new JLabel("" +  scoring.playerOneSetScore);
+        PlayerOneSet3 = new JLabel("" + scoring.playerOneSetScore);
+        PlayerOneSet4 = new JLabel("" + scoring.playerOneSetScore);
+        PlayerOneSet5 = new JLabel("" + scoring.playerOneSetScore);
+        GameSetOne = new JLabel("" + playerOneGameScore);
+        
+        PlayerTwoSet1 = new JLabel("" + scoring.playerTwoSetScore);
+        PlayerTwoSet2 = new JLabel("" + scoring.playerTwoSetScore);
+        PlayerTwoSet3 = new JLabel("" + scoring.playerTwoSetScore);
+        PlayerTwoSet4 = new JLabel("" + scoring.playerTwoSetScore);
+        PlayerTwoSet5 = new JLabel("" + scoring.playerTwoSetScore);
+        GameSetTwo = new JLabel("" + scoring.playerOneGameScore);
         
         penaltyMenu.add(penaltyItem1);
         penaltyMenu.add(penaltyItem2);
@@ -271,22 +229,109 @@ public class TennisStart extends JFrame implements ActionListener {
         
         menuBar.add(penaltyMenu);
         
+        playerOneScoreInc.addActionListener(this);
+        playerTwoScoreInc.addActionListener(this);
         //Propagate window objects
         gameScreen.add(menuBar);
         
-        gameScreen.pack();
-        gameScreen.setSize(800, 600);
+        gameScreen.add(playerOneLabel);
+        gameScreen.add(playerTwoLabel);
         
+        gameScreen.add(playerOneScoreInc);
+        gameScreen.add(playerTwoScoreInc);
+        
+        gameScreen.add(GameSet);
+        gameScreen.add(GameSetOne);
+        gameScreen.add(GameSetTwo);
+        
+        
+        if (gender.getText().equals("F")) 
+        {
+        	requiredSets = 2;
+        	
+        	gameScreen.add(Set1);
+        	gameScreen.add(Set2);
+        	gameScreen.add(Set3);
+        	
+        	gameScreen.add(PlayerOneSet1);
+        	gameScreen.add(PlayerOneSet2);
+        	gameScreen.add(PlayerOneSet3);
+        	
+        	gameScreen.add(PlayerTwoSet1);
+        	gameScreen.add(PlayerTwoSet2);
+        	gameScreen.add(PlayerTwoSet3);
+        	
+        	
+    		
+        }
+        else 
+        {
+        	requiredSets = 3;
+        	
+        	gameScreen.add(Set1);
+        	gameScreen.add(Set2);
+        	gameScreen.add(Set3);
+        	gameScreen.add(Set4);
+        	gameScreen.add(Set5);
+        	
+        	gameScreen.add(PlayerOneSet1);
+        	gameScreen.add(PlayerOneSet2);
+        	gameScreen.add(PlayerOneSet3);
+        	gameScreen.add(PlayerOneSet4);
+        	gameScreen.add(PlayerOneSet5);
+        	
+        	gameScreen.add(PlayerTwoSet1);
+        	gameScreen.add(PlayerTwoSet2);
+        	gameScreen.add(PlayerTwoSet3);
+        	gameScreen.add(PlayerTwoSet4);
+        	gameScreen.add(PlayerTwoSet5);
+        	
+        	
+        }
+        
+        gameScreen.pack();
+        gameScreen.setSize(1280, 720);
+        gameScreen.setLayout(null);
         gameScreen.setVisible(true);
+        
+        //Initialize font.
+        playerOneLabel.setFont(new Font("",Font.PLAIN,16));
+        playerTwoLabel.setFont(new Font("",Font.PLAIN,16));
+        
+        playerOneLabel.setBounds(100,280,250,25);
+        playerTwoLabel.setBounds(100,360,250,25);
+        
+        Set1.setBounds(225,250,250,25);
+        Set2.setBounds(375,250,250,25);
+        Set3.setBounds(500,250,250,25);
+        Set4.setBounds(625,250,250,25);
+        Set5.setBounds(750,250,250,25);
+        
+        PlayerOneSet1.setBounds(225,280,250,25);
+        PlayerOneSet2.setBounds(375,280,250,25);
+        PlayerOneSet3.setBounds(500,280,250,25);
+        PlayerOneSet4.setBounds(625,280,250,25);
+        PlayerOneSet5.setBounds(750,280,250,25);
+        
+        PlayerTwoSet1.setBounds(225,360,250,25);
+        PlayerTwoSet2.setBounds(375,360,250,25);
+        PlayerTwoSet3.setBounds(500,360,250,25);
+        PlayerTwoSet4.setBounds(625,360,250,25);
+        PlayerTwoSet5.setBounds(750,360,250,25);
+        
+        GameSet.setBounds(900,250,250,25);
+        GameSetOne.setBounds(900,280,250,25);
+        GameSetTwo.setBounds(900,360,250,25);
+        
+        
+        
+        playerOneScoreInc.setBounds(1000,280,150,25);
+        playerTwoScoreInc.setBounds(1000,360,150,25);
+
         
         System.out.println("Done!");
 	}
 	
-	public void setGameAction() {
-		
-		
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
@@ -297,6 +342,7 @@ public class TennisStart extends JFrame implements ActionListener {
 			splashScreen.dispose();
 			prelimInfoScreen();
 			break;
+			
 		case "Commit information":
 			if((stadiumName.getText().equals("")) || (location.getText().equals("")) || (fieldType.getText().equals("")) || (playerOneName.getText().equals(""))
 					|| (playerTwoName.getText().equals("")) || (playerOneCountry.getText().equals("")) || (playerTwoCountry.getText().equals("")) || (gender.getText().equals("")))
@@ -321,6 +367,7 @@ public class TennisStart extends JFrame implements ActionListener {
 			{
 				System.out.println("Triggered valid sequence");
 				if(gender.getText().equals("M"))
+					
 					System.out.println("Male match");
 				else if(gender.getText().equals("F"))
 					System.out.println("Female match");
@@ -328,6 +375,15 @@ public class TennisStart extends JFrame implements ActionListener {
 				startGameWindow();
 			}
 			break;
+			
+			case "Player One +1":
+				scoring.PlayerOneScoring();
+				playerOneGameScore = scoring.playerOneGameScore;
+				GameSetOne = new JLabel("" + playerOneGameScore);
+				gameScreen.add(GameSetOne);
+			break;
+	
+			
 		}
 		
 	}

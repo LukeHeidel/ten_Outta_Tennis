@@ -1,6 +1,6 @@
 package tennisGame;
 
-public class TennisScoring 
+public class TennisScoring
 {
 	
 	protected int playerOneGameScore;
@@ -33,22 +33,28 @@ public class TennisScoring
 	//TODO: Build and implement penalty logic.
 	
 	
-	public void PlayerOneScoring() 
+	public int PlayerOneScoring() 
 	{
-		
+		System.out.println("Player one score +1");
 		if (playerOneGameScore == 0) 
 		{
 			playerOneGameScore = playerOneGameScore + 15;
+			System.out.println(playerOneGameScore);
+			return playerOneGameScore;	
 		}
-		if (playerOneGameScore == 15) 
+		else if (playerOneGameScore == 15) 
 		{
 			playerOneGameScore = playerOneGameScore + 15;
+			System.out.println(playerOneGameScore);
+			return playerOneGameScore;	
 		}
-		if(playerOneGameScore == 30) 
+		else if(playerOneGameScore == 30) 
 		{
 			playerOneGameScore = playerOneGameScore + 10;
+			System.out.println(playerOneGameScore);
+			return playerOneGameScore;	
 		}
-		if (playerOneGameScore == 40 && playerTwoGameScore < 40)
+		else if (playerOneGameScore == 40 && playerTwoGameScore < 40)
 		{
 			playerOneSetScore = playerOneSetScore + 1;
 			playerOneGameScore = 0;
@@ -56,31 +62,38 @@ public class TennisScoring
 			playerOneServe = !playerOneServe;
 			playerTwoServe = !playerTwoServe;
 		}
-		if (playerOneSetScore == 6 && playerOneSetScore - 2 >= playerTwoSetScore)
+		else if (playerOneSetScore == 6 && playerOneSetScore - 2 >= playerTwoSetScore)
 		{
 			playerOneSetWins = playerOneSetWins + 1;
 		} 
-		if (playerOneSetWins == requiredSets)
+		else if (playerOneSetWins == requiredSets)
 		{
 			//TODO have Player one win
-		}	
+		}
+		return playerOneGameScore;	
 	
 	}
 	
-	public void PlayerTwoScoring() 
+	public int PlayerTwoScoring() 
 	{
-		
+		System.out.println("Player two score +1");
 		if (playerTwoGameScore == 0) 
 		{
 			playerTwoGameScore = playerTwoGameScore + 15;
+			System.out.println(playerTwoGameScore);
+			return(playerTwoGameScore);
 		}
 		else if (playerTwoGameScore == 15) 
 		{
 			playerTwoGameScore = playerTwoGameScore + 15;
+			System.out.println(playerTwoGameScore);
+			return(playerTwoGameScore);
 		}
 		else if(playerTwoGameScore == 30) 
 		{
 			playerTwoGameScore = playerTwoGameScore + 10;
+			System.out.println(playerTwoGameScore);
+			return(playerTwoGameScore);
 		}
 		else if (playerTwoGameScore == 40 && playerOneGameScore < 40)
 		{
@@ -97,12 +110,14 @@ public class TennisScoring
 		else if (playerOneSetWins == requiredSets)
 		{
 			//TODO have Player Two win
-		}	
+		}
+		return playerTwoGameScore;	
 			
 	}
 	
 	public void gameTieBreaker()
 	{
+		System.out.println("tie breaker");
 		tie = true;
 
 		if(playerOneAdvantage == true)
@@ -134,6 +149,7 @@ public class TennisScoring
 	
 	public void setTieBreaker()
 	{
+		System.out.println("set tie breaker");
 		if (playerOneSetScore == 6 && playerOneSetScore == 6) 
 		{
 			playerOneServe = !playerOneServe;
